@@ -33,8 +33,12 @@ jobs:
         run: chmod +x ./gradlew
       - name: build
         run: ./gradlew build
-      - name: capture build artifacts
+      - name: rename artifacts
+        run: |
+          cd build/libs
+          rename 's/^/${{ matrix.os }}-${{ matrix.java }}-/' *
+          cd ../../
+      - name: upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: Java ${{ matrix.java }} on ${{ runner.os }}
-          path: build/libs/
+          path: build/libs
