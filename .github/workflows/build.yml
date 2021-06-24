@@ -8,6 +8,7 @@ on: [pull_request, push]
 
 jobs:
   build:
+    name: Java ${{ matrix.java }} on ${{ runner.os }}
     strategy:
       matrix:
         # Use these Java versions
